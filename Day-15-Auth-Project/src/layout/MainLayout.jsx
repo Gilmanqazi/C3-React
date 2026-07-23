@@ -1,10 +1,17 @@
-import React from 'react'
-import { Outlet } from 'react-router-dom'
+
+import Navbar from "../components/Navbar";
+import { Outlet } from "react-router";
 
 const MainLayout = () => {
   return (
-    <div><Outlet/>Main</div>
-  )
-}
+    <div className="h-screen p-2 flex grid grid-cols-[1fr_7fr]">
+      <Navbar />
 
-export default MainLayout
+      <div className="h-full p-2 overflow-auto">
+        <Outlet />
+      </div>
+    </div>
+  );
+};
+
+export default MainLayout;

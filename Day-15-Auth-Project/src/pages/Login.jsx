@@ -1,38 +1,12 @@
-import React, { useContext, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
-import { Auth } from '../context/AuthContext';
+import { useAuth } from '../hooks/useAuth';
+
+
 
 export  function Login() {
-  
-  const navigate = useNavigate()
 
-  const {loginUser,setLoginUser,registredUser} = useContext(Auth)
+const {loginFormSubmit,handleSubmit,register,navigate} = useAuth()
 
 
-  const {register,handleSubmit,reset,formState:{errors}} = useForm()
-
-  const submitHandle = (data)=>{
-
-    const savedUser = JSON.parse(localStorage.getItem("registerUser",data)) || []
-
-    let user = savedUser.find((val) => {
-      return val.email === data.email && val.password === data.password;
-    });
-
-    if(!user){
-       alert("User Not Found")
-       reset()
-       return
-    }
-
-    setLoginUser(user)
-
-    localStorage.setItem("loggedInUser",JSON.stringify(user))
-    alert("User Login")
-    reset()
-    navigate("/main")
-  }
 
   return (
     <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md border border-slate-100">
@@ -41,13 +15,15 @@ export  function Login() {
         <p className="text-sm text-slate-500 mt-1">Please enter your details to sign in</p>
       </div>
 
-      <form onSubmit={handleSubmit(submitHandle)} className="space-y-4">
+      <form onSubmit={handleSubmit(loginFormSubmit)} className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-slate-700 mb-1" htmlFor="email">
             Email Address
           </label>
           <input
-          {...register("email")}
+          {...register("email",{
+            required:"Email Is Required"
+          })}
             type="email"
             id="email"
             name="email"
@@ -62,7 +38,13 @@ export  function Login() {
             Password
           </label>
           <input
-          {...register("password")}
+          {...register("password",{
+            required:"Password Is Required",
+            minLength:{
+              value:6,
+              message:"Password should be 6 character"
+            }
+          })}
             type="password"
             id="password"
             name="password"

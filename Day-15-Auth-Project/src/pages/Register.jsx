@@ -1,27 +1,9 @@
-import React, { useContext } from 'react';
-import {useForm} from "react-hook-form"
-import { useNavigate } from 'react-router-dom';
-import { Auth } from '../context/AuthContext';
+
+import { useAuth } from '../hooks/useAuth';
 
 export function Register() {
 
-  const navigate = useNavigate()
-
-  const {registredUser,setRegistredUser,setLoginUser} = useContext(Auth)
- 
-const {register,handleSubmit,reset,formState:{errors}} = useForm()
-
-const submitHandle = (data)=>{
-  let arr = [...(registredUser) || [],data]
-
-  setRegistredUser(arr)
-  alert("user Register Successfully")
-  setLoginUser(data)
-  localStorage.setItem("loggedInUser",JSON.stringify(data))
-  localStorage.setItem("registerUser",JSON.stringify(arr))
-  navigate("/main")
-  reset()
-}
+  const {register,handleSubmit,registerFromSubmit,errors,navigate} = useAuth()
 
 
   return (
@@ -31,7 +13,7 @@ const submitHandle = (data)=>{
         <p className="text-sm text-slate-500 mt-1">Sign up to get started today</p>
       </div>
 
-      <form onSubmit={handleSubmit(submitHandle)} className="space-y-4">
+      <form onSubmit={handleSubmit(registerFromSubmit)} className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-slate-700 mb-1" htmlFor="name">
             Full Name
@@ -66,6 +48,7 @@ const submitHandle = (data)=>{
             required
             className="w-full px-4 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
           />
+           {errors.email && <p className='text-red-500'>{errors.email.message}</p>}
         </div>
 
         <div>
@@ -74,7 +57,11 @@ const submitHandle = (data)=>{
           </label>
           <input
            {...register("password",{
-            required:"Password Is Required"
+            required:"Password Is Required",
+            minLength:{
+              value:6,
+              message:"Password should be 6 character"
+            }
           })}
             type="password"
             id="password"
@@ -84,6 +71,7 @@ const submitHandle = (data)=>{
             required
             className="w-full px-4 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
           />
+           {errors.password && <p className='text-red-500'>{errors.password.message}</p>}
         </div>
 
         <button
