@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+
+/* 1. कंटेनर का साइज छोटा और स्टाइलिश रखना */
+.Toastify__toast-container {
+  width: 220px !important;
+}
+
+/* 2. टोस्ट का मुख्य कार्ड - Glassmorphism + Minimalist Design */
+.Toastify__toast {
+  background: rgba(25, 25, 25, 0.85) !important; /* डार्क ट्रांसपेरेंट बैकग्राउंड */
+  backdrop-filter: blur(8px) !important; /* ब्लर इफेक्ट */
+  -webkit-backdrop-filter: blur(8px) !important;
+  border-radius: 12px !important; /* घुमावदार कोने */
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3) !important;
+  padding: 10px 14px !important;
+  min-height: 50px !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  overflow: hidden;
+}
+
+/* 3. टेक्स्ट को सुंदर और छोटा बनाना */
+.Toastify__toast-body {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: #ffffff !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* 4. प्रोग्रेस बार को पतला और नियॉन लुक देना */
+.Toastify__progress-bar {
+  height: 3px !important;
+}
+
+/* 5. अलग-अलग स्टेट्स के लिए Left Border (नियॉन टच) */
+.Toastify__toast--success {
+  border-left: 4px solid #10B981 !important; /* Emerald Green */
+}
+.Toastify__progress-bar--success {
+  background: #10B981 !important;
+}
+
+.Toastify__toast--error {
+  border-left: 4px solid #EF4444 !important; /* Rose Red */
+}
+.Toastify__progress-bar--error {
+  background: #EF4444 !important;
+}
+
+.Toastify__toast--info {
+  border-left: 4px solid #3B82F6 !important; /* Neon Blue */
+}
+.Toastify__progress-bar--info {
+  background: #3B82F6 !important;
+}
+
+/* 6. क्लोज (X) बटन को सफ़ेद और साफ रखना */
+.Toastify__close-button {
+  color: #fff !important;
+  opacity: 0.6;
+  align-self: center !important;
+}
+.Toastify__close-button:hover {
+  opacity: 1;
+}
