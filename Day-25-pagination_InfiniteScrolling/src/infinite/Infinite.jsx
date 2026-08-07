@@ -20,12 +20,12 @@ const Infinite = () => {
 
   if(isPending) return "Loading...."
 
-  const allProdcuts = data?.pages?.flatMap((val)=>val.products) ?? []
+  const allProducts = data?.pages?.flatMap((val)=>val.products) ?? []
 
   return (
     <div className="grid w-full p-4 grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
       {
-        allProdcuts?.map((val)=>(
+        allProducts?.map((val)=>(
           <ProductCard key={val.id} product={val} />
         ))
       }
@@ -33,7 +33,7 @@ const Infinite = () => {
       <div>
         {
           hasNextPage &&(
-            <button onClick={()=>fetchNextPage()}>{isFetchingNextPage ? "loading": "Load More"}</button>
+            <button onClick={()=>fetchNextPage()}>{isFetchingNextPage ? "loading..": "Load More"}</button>
           )
         }
       </div>
